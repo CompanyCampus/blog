@@ -59,7 +59,7 @@ h1 {
     margin-bottom: 0px;
 }
 
-#menu p{
+#menu .date, #menu .author {
     font-size:12px;
     font-weight: 400;
     color:#416C79;

@@ -1,5 +1,9 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Data.Function (on)
+import           Data.List (intersperse, sortBy)
+import qualified Data.Map as M
+import           Data.Maybe (fromMaybe)
 import           Data.Monoid (mappend)
 import           Hakyll
 
@@ -60,7 +64,15 @@ main = hakyll $ do
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
+    recentPostsCtx `mappend`
     defaultContext
+
+recentPostsCtx :: Context String
+recentPostsCtx =
+    field "posts" $ \_ ->
+            depFreePostList $ fmap (take 5) . recentFirst'
+  where
+    recentFirst' = return . reverse . sortBy (compare `on` (show . fst))
 
 
 --------------------------------------------------------------------------------
@@ -70,3 +82,38 @@ postList sortFilter = do
     itemTpl <- loadBody "templates/post-item.html"
     list    <- applyTemplateList itemTpl postCtx posts
     return list
+
+
+depFreePostList :: ([(Identifier, Metadata)] -> Compiler [(Identifier, Metadata)]) -> Compiler String
+depFreePostList sortFilter = do
+    postsMetadata <- sortFilter =<< getAllMetadata "posts/*"
+    itemTpl <- loadBody "templates/post-item.html"
+    applyTemplateListWithContexts itemTpl (map mkPair postsMetadata)
+  where
+    mkPair (i, m) = (makeDefaultContext (i, m), Item i "")
+
+applyJoinTemplateListWithContexts :: String
+                                  -> Template
+                                  -> [(Context a, Item a)]
+                                  -> Compiler String
+applyJoinTemplateListWithContexts delimiter tpl pairs = do
+    items <- mapM (\p -> applyTemplate tpl (fst p) (snd p)) pairs
+    return $ concat $ intersperse delimiter $ map itemBody items
+
+applyTemplateListWithContexts = applyJoinTemplateListWithContexts ""
+
+
+makeDefaultContext :: (Identifier, Metadata) -> Context String
+makeDefaultContext (i, m) =
+        makeUrlField i `mappend`
+        dateField "date" "%B %e, %Y" `mappend`
+        makeMetadataContext m
+    where
+        makeMetadataContext m =
+            (Context $ \k _ -> do
+                return $ fromMaybe "" $ M.lookup k m)
+
+        makeUrlField id =
+            field "url" $ \_ -> do
+                fp <- getRoute id
+                return $ fromMaybe "" $ fmap toUrl fp

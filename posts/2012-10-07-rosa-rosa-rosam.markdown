@@ -1,5 +1,6 @@
 ---
 title: Rosa Rosa Rosam
+author: John Doe
 ---
 
 Suspendisse pharetra ullamcorper sem et auctor. Suspendisse vitae tellus eu

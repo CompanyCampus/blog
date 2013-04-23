@@ -1,5 +1,6 @@
 ---
 title: Carpe Diem
+author: John Doe
 ---
 
 Fusce tortor quam, egestas in posuere quis, porttitor vel turpis. Donec
