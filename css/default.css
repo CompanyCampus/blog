@@ -1,0 +1,138 @@
+body {
+    background-color: #fff;
+    margin: 0px auto 0px auto;
+    font-family: 'Merriweather', 'Georgia', serif;
+    color:#323232;
+    min-height: 100%;
+    font-size: 16px;
+}
+
+p a{
+    color:#5F98A9;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+p a:hover{
+    color:#416C79;
+    font-weight: 700;
+    text-decoration: none; 
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 900;
+}
+
+#header{
+    background-color: #5F98A9;
+    height:100%;
+    width:40px;
+    position: fixed;
+}
+
+#menu {
+    background-color:#18272C;
+    width: 400px;
+    margin-left: 40px;
+    position: fixed;
+    top:0;
+    bottom: 0;
+
+}
+
+#menu ul{
+    list-style-type: none; 
+}
+
+#menu h1{
+    margin-left: 40px;
+    font-size: 36px;
+    font-weight: 900;
+    color:#fff;
+}
+#menu h2 a{
+    font-size:24px;
+    font-weight: 700;
+    color:#416C79;
+    text-decoration: none;
+    margin-bottom: 0px;
+}
+
+#menu p{
+    font-size:12px;
+    font-weight: 400;
+    color:#416C79;
+    text-decoration: none;
+    margin-top:0px;
+}
+
+#menu a:hover{
+    font-size:24px;
+    font-weight: 700;
+    color:#5F98A9;
+    text-decoration: none;
+    margin-bottom: 0px;
+}
+
+#content{
+    max-width: 800px;
+    margin-right: 5%;
+    margin-left: 480px;
+    position: absolute;
+}
+
+#content p{
+
+    line-height: 1.5;
+    color:#323232;
+}
+
+.icons {
+    margin-top: 20%;
+    max-width:28px;
+    margin-left: 6px;
+}
+
+.social {
+    position: absolute;
+    bottom: 0;
+}
+
+.navigation {
+    position: absolute;
+    top: 20px;
+}
+
+.posted{
+    font-size: 12px;
+}
+
+.tag a{
+    background-color: #ffffff;
+    border: solid 1px #5F98A9;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.tag a:hover{
+    background-color: #5F98A9;
+}
+
+.tag h4 a{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    color:#5F98A9;
+    font-size: 10px;
+    text-decoration: none;
+    padding: 6px 4px 4px 4px;
+}
+.tag h4 a:hover{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    color:#ffffff;
+    text-decoration: none;
+}
+
+.container .teams h2{
+    color: #000000;
+}
