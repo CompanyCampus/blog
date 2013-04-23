@@ -1,3 +1,8 @@
+all: build
+
+build: site
+	./site build
+
 preview: site
 	./site preview
 
