@@ -11,6 +11,8 @@ import           Hakyll
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
+    tags <- buildTags "posts/*" (fromCapture "tags/*.html")
+
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -28,9 +30,27 @@ main = hakyll $ do
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= loadAndApplyTemplate "templates/post.html"    (tagsCtx tags)
+            >>= loadAndApplyTemplate "templates/sidebar.html" (tagsCtx tags)
+            >>= loadAndApplyTemplate "templates/default.html" (tagsCtx tags)
             >>= relativizeUrls
+
+    tagsRules tags $ \tag pattern -> do
+        let title = "Posts tagged " ++ tag
+        route idRoute
+        compile $ do
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/post.html"
+                        (constField "title" title `mappend`
+                            constField "body" "" `mappend`
+                            constField "date" "" `mappend`
+                            constField "prettytags" "" `mappend`
+                            constField "posts" "" `mappend`
+                            defaultContext)
+                >>= loadAndApplyTemplate "templates/default.html"
+                        (constField "title" title `mappend`
+                            defaultContext)
+                >>= relativizeUrls
 
     create ["archive.html"] $ do
         route idRoute
@@ -66,6 +86,11 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     recentPostsCtx `mappend`
     defaultContext
+
+tagsCtx :: Tags -> Context String
+tagsCtx tags =
+    tagsField "prettytags" tags `mappend`
+    postCtx
 
 recentPostsCtx :: Context String
 recentPostsCtx =

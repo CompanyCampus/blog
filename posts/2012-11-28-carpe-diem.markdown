@@ -1,6 +1,7 @@
 ---
 title: Carpe Diem
 author: John Doe
+tags: fish, robin williams
 ---
 
 Fusce tortor quam, egestas in posuere quis, porttitor vel turpis. Donec

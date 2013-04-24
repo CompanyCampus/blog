@@ -1,6 +1,7 @@
 ---
 title: Meet the geek
 author: Quentin Adam
+tags: slip, caleçons, CCUS, startup
 ---
 
 This is a french post, Company Campus is French based and this post is about French things.

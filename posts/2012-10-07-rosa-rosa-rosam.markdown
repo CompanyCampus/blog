@@ -1,6 +1,7 @@
 ---
 title: Rosa Rosa Rosam
 author: John Doe
+tags: declinaisons, latines
 ---
 
 Suspendisse pharetra ullamcorper sem et auctor. Suspendisse vitae tellus eu
